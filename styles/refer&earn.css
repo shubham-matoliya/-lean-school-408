@@ -1,0 +1,29 @@
+#ref{
+    width: 43%;
+    height:auto;
+     border: 1px solid transparent;
+    margin: auto;
+    margin-top:50px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 10px;
+}
+
+  h1,p,img{
+    margin-top: 20px;
+   margin-left:70px;
+}
+#box{
+ width: 100%;
+ display: flex;
+ /* border: 1px solid red; */
+  margin-right:20px;
+ }
+ .p{
+  width: 100%;
+ display: flex;
+ /* border: 1px solid red; */
+font-size: 15px;
+ }
+ a{
+  text-decoration: none;
+ }   
