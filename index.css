@@ -384,5 +384,14 @@ a {
 }
 .banner .container > .date {
   padding: 6px 0;
+}
+.login {
   /* border: 1px solid red; */
+  text-align: center;
+  width: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }

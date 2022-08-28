@@ -37,7 +37,7 @@ let navbar = `
 <div class="right">
   <div class="host">
     <div class="hostlogo">
-      <a href="host.html.html">
+      <a href="host1.html.html">
         <img
           src="https://www.zoomcar.com/build/e222e7ff96ffdd76290118718d52d71f.svg"
           alt=""
@@ -50,6 +50,5 @@ let navbar = `
   <div class="login"><a href="Login.html">Login/Signup</a></div>
 </div>
 `;
-
 
 export { str, navbar };
