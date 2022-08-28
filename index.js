@@ -44,7 +44,7 @@ document.querySelector(".Airport").addEventListener("click", (event) => {
 document.querySelector(".findcars").addEventListener("click", () => {
   window.location.href = "searchCars.html";
 });
-let address = localStorage.getItem("currentSearch");
+let address = localStorage.getItem("currentSearch") || "Search for address";
 document.querySelector(".banner .container .address p").innerText = address;
 
 
