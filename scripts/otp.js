@@ -7,6 +7,7 @@ function append(userData){
     p.innerHTML = null;
     userData.filter(el=>{
 let div=document.createElement("div");
+div.innerHTML = null;
 let  mob=document.createElement("p")
 mob.innerText=`Enter your otp +91 ${el.number}`;
 div.append(mob)

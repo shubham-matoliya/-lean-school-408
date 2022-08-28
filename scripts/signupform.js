@@ -19,7 +19,7 @@ let userData=JSON.parse(localStorage.getItem("userName"))||[];
 
     function check(name){
         let filtered = userData.filter((el)=>{
-            return name = el.name;
+            return name === el.name;
         })
         if(filtered.length>0){
             return false

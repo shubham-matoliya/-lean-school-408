@@ -19,7 +19,7 @@ function save(event){
 
 function check(email){
     let filtered = userData.filter((el)=>{
-        return email = el.email;
+        return email === el.email;
         //console.log(number,el.number)
     })
     if(filtered.length>0){
