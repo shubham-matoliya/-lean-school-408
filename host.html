@@ -12,7 +12,7 @@
     <div id="navbar">
         <div id="nav">
       <div id="pare1">
-        <a><div id="menu" onclick = "openNav()">
+        <a><div id="menu" onclick="sidenav()">
             <div></div>
             <div></div>
             <div></div>
@@ -20,10 +20,10 @@
         <div id="header_logo"><a href = "index.html"><img src="https://www.zoomcar.com/zap/subscribe/build/7f1998e5f3e2ea1ad605b2203aef2ac5.svg"></a></div>
       </div>
       <div id="pare2">
-            <div><a>Contact Us</a></div>
+            <div><a href="./contact.html">Contact Us</a></div>
             <div><a>FAQs</a></div>
             <div><a>Refer & Earn</a></div>
-            <div><a>SignUp/LogIn</a></div>
+            <div><a href="./signupform.html">SignUp/LogIn</a></div>
             <div><a href="earning.html"><button >   START EARNING</button></a></div>
       </div>
     </div>
@@ -276,8 +276,8 @@
 
 </body>
 </body>
+</html>
 <script>
-
     window.addEventListener("scroll", function () {
       let navbar = document.querySelector("#navbar");
       navbar.classList.toggle("sticky", window.scrollY);
@@ -304,8 +304,9 @@ function muteFn(){
 
 
 // Side-Navbar
-function openNav() {
-
+console.log(sidenav())
+function sidenav() {
+    console.log("hi")
     document.getElementById("side-navbar").style.width = "400px";
   
     document.getElementById("main").style.backgroundColor = "rgba(0,0,0,0.6)";
@@ -330,4 +331,3 @@ function openNav() {
     document.getElementById("main").style.left = "0";
   }
 </script>
-</html>

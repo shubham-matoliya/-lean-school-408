@@ -45,7 +45,7 @@
         #pare2>div{
             margin-right: 22px;
             font-size: 15px;
-            /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
         }
         #pare2>div>a{
             text-decoration: none;
@@ -110,7 +110,7 @@
 #side-navbar a {
   text-decoration: none;
   font-size: 18px;
-  /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   cursor: pointer;
   padding: 19px 20px;
   color: #323a44;
