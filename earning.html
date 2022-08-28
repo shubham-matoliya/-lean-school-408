@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share your car and Earn</title>
+    <style>
+        #pare {
+            width: 500px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        #child1 {
+            display: flex;
+            justify-content: center;
+            font-size: 37px;
+        }
+
+        #child2 {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            font-size: 20px;
+            text-align: center;
+            color: rgb(139, 139, 139);
+        }
+
+        #form {
+            margin-top: 60px;
+        }
+
+        .chin1 {
+            width: 45%;
+            height: 50px;
+            margin-left: 10px;
+            padding-left: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        .chin2 {
+            width: 94%;
+            height: 50px;
+            margin-left: 10px;
+            padding-left: 10px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        #button {
+            margin-left: 200px;
+            width: 120px;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            background-color: rgb(88, 210, 106);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        #pare2 {
+            margin-top: 30px;
+            color: rgb(88, 210, 106);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pare">
+        <div id="child1"><b>Connect With Us</b></div>
+        <div id="child2">
+            Leave details for us to help your business become future ready
+        </div>
+        <div id="child3">
+            <form id="form">
+                <input type="name" placeholder="Name" class="chin1" />
+                <input type="company" placeholder="Car's Brand" class="chin1" />
+                <br />
+                <input type="email" placeholder="Email" class="chin2" />
+                <br />
+                <input type="number" placeholder="Phone" class="chin1" />
+                <input type="text" placeholder="Country" class="chin1" />
+                <br />
+                <input type="text" placeholder="Car Details (optional)" class="chin2" />
+                <br />
+                <button id="button" onclick="printFn()">Submit</button>
+            </form>
+        </div>
+        <div id="pare2"></div>
+    </div>
+</body>
+<script>
+    var p = document.createElement("p");
+    p.innerText =
+      "Your details have been submitted successfully.We'll reach out to you shortly.";
+
+    function printFn() {
+      event.preventDefault();
+      document.querySelector("#pare2").append(p);
+      alert(
+        "Your details have been submitted successfully. We'll reach out to you shortly."
+      );
+      window.location.href = "index.html";
+    }
+</script>
+
+</html>
