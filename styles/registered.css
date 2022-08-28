@@ -1,0 +1,96 @@
+.box {
+    width: 45%;
+    height: 600px;
+    margin: auto;
+
+    /* background-image: linear-gradient(to right, #cdf3da 0%, #38f9d7 100%); */
+  }
+
+  img {
+    width: 30px;
+    margin-top: 5%;
+  
+  }
+
+  button {
+  height: 50px;
+    width: 100%;
+    margin-top: 35%;
+    margin-left: -10%;
+    border: none;
+    color: white;
+    background-color: grey;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5px;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: green;
+  }
+
+  #sel {
+    width: 100px;
+    padding: 8px;
+    margin-left: 30%;
+    border: 2px solid green;
+    font-size: 15px;
+    padding-right: 5px;
+
+  }
+
+  #mob {
+    padding: 5px;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+ 
+
+  a {
+    text-decoration: none;
+  }
+  #reg{
+    width: 100%;
+    height: 60px;
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  #reg>div{
+    width: 18%;
+    height: 100%;
+    border: 2px solid green;
+    border-radius: 5px;
+    align-items: center;
+  }
+  #reg>input{
+    width: 100%;
+    height: 80%;
+    border: 2px solid green;
+    border-radius: 5px;
+  }
+  #reg>div>p{
+    margin-left: 20%;
+    align-items: center;
+  }
+  #reg>div>p>img{
+    margin-right: 5px;
+  }
+  #reg2{
+    width: 100%;
+    height: 60px;
+    justify-content: space-between;
+  }
+  #reg2>input{
+    width: 100%;
+    height: 98%;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-bottom: 25px;
+  }
+  #reg2>#email{
+    width: 121%;
+    margin-left: -98px;
+  }

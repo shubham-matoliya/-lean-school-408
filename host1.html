@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Car and Earn</title>
+    <style>
+        body {
+            margin: auto;
+        }
+
+        /* NavBar */
+        #navbar {
+            position: sticky;
+            top: 0px;
+            width: 100%;
+            height: 60px;
+            background-color: black;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+
+        }
+
+        #pare1 {
+            display: flex;
+            align-items: center;
+        }
+
+        #menu {
+            margin-right: 30px;
+            margin-left: 22px;
+        }
+
+        #menu>div {
+            width: 35px;
+            height: 4px;
+            background-color: white;
+            border-radius: 10px;
+            margin: 6px 0;
+        }
+
+        #header_logo>a>img {
+            height: 60px;
+        }
+
+        #pare2 {
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        #pare2>div {
+            margin-right: 22px;
+            font-size: 15px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #pare2>div>a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #pare2>div>a>button {
+            height: 42px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+            font-size: 16px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 0.5px solid black;
+            border-radius: 6px;
+            background-color: rgb(46, 159, 46);
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        @media all and (max-width:860px) {
+            #pare2>div>a {
+                font-size: 0px;
+            }
+        }
+
+        @media all and (min-width:80px) and (max-width:600px) {
+            #navbar {
+                width: 600px;
+            }
+        }
+
+        /* Side-Navbar */
+        #side-navbar div {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 25px;
+        }
+
+        #navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #side-navbar .active {
+            background-color: #e5e8ec;
+        }
+
+        #side-navbar {
+            display: flex;
+            flex-direction: column;
+            width: 0;
+            height: 100vh;
+            background: #fff;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            font-size: 14px;
+        }
+
+        #side-navbar a {
+            text-decoration: none;
+            font-size: 18px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            cursor: pointer;
+            padding: 19px 20px;
+            color: #323a44;
+            transition: 0.1s;
+        }
+
+        #side-navbar a .fa-solid {
+            margin-right: 10px;
+        }
+
+        #side-navbar .change-city {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #side-navbar .change-city .cityName {
+            font-size: 14px;
+            font-weight: bold;
+            color: #10a310;
+        }
+
+        #side-navbar .change-city>div {
+            color: #323a44;
+            font-size: 14px;
+        }
+
+        @media all and (max-width: 900px) {
+            #navbar nav ul {
+                width: 0;
+                font-size: 0;
+            }
+        }
+
+        /* King */
+        #king {
+            width: 90%;
+            margin: auto;
+            max-width: 1300px;
+        }
+
+        /* Content */
+        #top1 {
+            display: flex;
+            border-radius: 10px;
+            justify-content: center;
+            position: relative;
+            z-index: -1;
+        }
+
+        #top1>img {
+            width: 100%;
+            min-width: 900px;
+            max-width: 1300px;
+            margin: auto;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        }
+
+        #top1>div {
+            position: absolute;
+            top: 50px;
+            left: 40px;
+            min-width: 700px;
+        }
+
+        #top1>div>b {
+            color: white;
+            font-size: 42px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        #top1>div>p {
+            color: white;
+            font-size: 17px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        #top1>div>a>button {
+            height: 42px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+            font-size: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 0.5px solid black;
+            border-radius: 6px;
+            background-color: rgb(46, 159, 46);
+        }
+
+        /* Video */
+        #video {
+            display: flex;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+            justify-content: center;
+        }
+
+        #video>video {
+            height: 480px;
+            margin-top: 15px;
+            z-index: -1;
+        }
+
+        /* Mute/Unmute in Video */
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+        }
+
+        #video>#button {
+            position: absolute;
+            margin-top: 430px;
+            margin-left: 80%;
+            width: 38px;
+            height: 38px;
+            font-family: 'Material Icons';
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            background-color: rgba(195, 199, 196, 0.744);
+        }
+
+
+        /* Content */
+        #top2 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #top2>a>img {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+
+
+        #top3 {
+            margin-top: 80px;
+        }
+
+        #top3>div {
+            display: flex;
+            justify-content: center;
+            width: 85%;
+            font-size: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: auto;
+            text-align: center;
+        }
+
+        #bot {
+            display: flex;
+            justify-content: center;
+        }
+
+        .box1 {
+            width: 50%;
+            margin-top: 60px;
+            margin-right: 40px;
+            margin-left: 40px;
+            text-align: justify;
+        }
+
+        .box1>h3 {
+            font-size: 28px;
+            margin-top: 50px;
+        }
+
+        .box1>p {
+            font-size: 18px;
+            color: #a6a9ae;
+        }
+
+        .box2 {
+            margin-top: 20px;
+            margin-right: 30px;
+
+        }
+
+        .box2>img {
+            margin-top: 80px;
+            width: 300px;
+        }
+
+        @media all and (max-width: 650px) {
+            .box2>img {
+                max-width: 0px;
+            }
+
+            .box1 {
+                width: 100%;
+                margin: auto
+            }
+        }
+
+
+
+        #top4 {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+        }
+
+        #top4>div>h3 {
+            margin-top: 100px;
+            font-size: 40px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #child {
+            display: flex;
+            min-width: 860px;
+            max-width: 1000px;
+            margin-left: 10%;
+            overflow: auto;
+        }
+
+        #child>div {
+            width: 35%;
+            margin-right: 20px;
+        }
+
+        #child>div>img {
+            height: 180px;
+            margin-bottom: 30px;
+        }
+
+        #child>div>b {
+            font-size: 15px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-bottom: -10px;
+        }
+
+        #child>div>p {
+            color: #616468;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: justify;
+        }
+
+
+
+        #top5>h3 {
+            margin-top: 120px;
+            font-size: 45px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #top5>p {
+            color: #616468;
+            margin-top: 80px;
+            font-size: 18px;
+        }
+
+        #top5>#child2 {
+            display: flex;
+            justify-content: center;
+            width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        #top5>#child2>div {
+            width: 230px;
+            height: 280px;
+            border-right: 2px solid #e0e0e0;
+            ;
+        }
+
+        #child2>div>img {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        #child2>div>b {
+            font-size: 30px;
+        }
+
+        #child2>div>p {
+            margin-top: 80px;
+            font-family: IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            color: #82868b;
+        }
+
+
+        #top6>h3 {
+            min-width: 700px;
+            margin-top: 80px;
+            margin-left: 4%;
+            font-size: 40px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        #top6>h3>span {
+            color: #1bb11b;
+        }
+
+        #top6>button {
+            height: 48px;
+            width: 180px;
+            color: white;
+            margin-bottom: 20px;
+            margin-left: 4%;
+            font-size: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 0.5px solid black;
+            border: none;
+            border-radius: 6px;
+            background-color: #1bb11b;
+        }
+
+        #top6>a {
+            color: #1bb11b;
+            margin-left: 4%;
+        }
+
+        #top6>div {
+            display: flex;
+            justify-content: center;
+            max-height: fit-content;
+            min-width: 900px;
+            margin-top: 4%;
+            background-image: linear-gradient(270deg, #444, #000);
+            border-radius: 10px;
+        }
+
+        #top6>div>img {
+            padding-left: 75%;
+            padding-right: 5%;
+            padding-top: 50px;
+            padding-bottom: 180px;
+        }
+
+        #child3 {
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        #child3>h3 {
+            font-size: 33px;
+            margin-left: 60px;
+            margin-top: -320px;
+        }
+
+        #child3>#p {
+            font-size: 18px;
+            margin-left: 60px;
+            margin-top: -40px;
+        }
+
+        #child3>button {
+            height: 48px;
+            width: 170px;
+            color: white;
+            margin-left: 60px;
+            margin-bottom: 40px;
+            font-size: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 0.5px solid black;
+            border: none;
+            border-radius: 6px;
+            background-color: #1bb11b;
+        }
+
+        #child3>p {
+            width: 90%;
+            margin: auto;
+            text-align: justify;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+
+
+        #top7 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 70px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            font-size: 25px;
+            text-align: center;
+        }
+
+
+        * {
+            text-decoration: none;
+        }
+
+        #feedback {
+            margin: auto;
+            height: 630px;
+            width: 85%;
+            display: flex;
+            overflow: auto;
+            /* overflow-x: scroll;  */
+            border-radius: 10px;
+            gap: 10px;
+            margin-top: 50px;
+            grid-template-columns: 212px auto;
+            background-color: rgb(245, 245, 245);
+            margin-bottom: 60px;
+        }
+
+        #first-box>h3 {
+            width: 150px;
+        }
+
+        #feedback div {
+            height: 500px;
+            width: 250px;
+            margin-top: 30px;
+            margin-left: 30px;
+
+        }
+
+        .amigo-home__heading--reviews {
+            font-family: IBM Plex Sans;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.33;
+            color: #1f1f1f;
+            margin: 0 0 2px;
+            grid-area: heading;
+
+        }
+
+        .amigo-home__text--review {
+            color: rgb(31, 31, 31);
+            padding-bottom: 12px;
+            margin: 0;
+            gap: 20px;
+        }
+
+
+        .amigo-home__text--reviewer-details {
+            font-size: 14px;
+            line-height: 1.43;
+            letter-spacing: .24px;
+            color: #666;
+        }
+
+        .host-box-8 {
+            padding-top: 30px;
+            display: grid;
+            grid-template-columns: 200px 500px;
+            border: 1px solid red;
+            width: 80%;
+            margin: auto;
+        }
+
+        .host-box-8-L-font {
+            font-size: 22px;
+        }
+
+        .host-box-8-R {
+            text-align: top;
+
+            margin: auto;
+            display: grid;
+            grid-template-columns: 500px 50px;
+        }
+
+        .host-box-8-R-font {
+            font-size: 17px;
+        }
+
+        .host-box-8-R-img {
+            text-align: center;
+            width: 30px;
+            height: 30px;
+        }
+
+        .host-box-8-border {
+            border: solid 1.2px #BDBDBD;
+            width: 100%;
+            /* height: 20px; */
+        }
+
+        #footer_1 {
+            background-color: rgb(245, 245, 245);
+            height: 180px;
+            width: 85%;
+            margin: auto;
+            align-items: flex-start;
+            margin-top: 20px;
+
+        }
+
+        #footer_1>img {
+            margin-top: 30px;
+            margin-left: 40px;
+        }
+
+        #last>p {
+            margin-left: 90px;
+            color: #b57e66;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="navbar">
+        <div id="nav">
+            <div id="pare1">
+                <a>
+                    <div id="menu" onclick="openNav()">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </a>
+                <div id="header_logo"><a href="index.html"><img
+                            src="https://www.zoomcar.com/zap/subscribe/build/7f1998e5f3e2ea1ad605b2203aef2ac5.svg"></a>
+                </div>
+            </div>
+            <div id="pare2">
+                <div><a href="./contact.html">Contact Us</a></div>
+                <div><a>FAQs</a></div>
+                <div><a>Refer & Earn</a></div>
+                <div><a>SignUp/LogIn</a></div>
+                <div><a href="./earning.html"><button>START EARNING</button></a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side-Navbar -->
+    <div id="main"></div>
+    <div id="side-navbar">
+
+        <a href="" class="active"><i class="fa-solid fa-user"></i>Login or Signup</a>
+
+        <a href="" class="change-city">
+            <div>
+                <i class="fa-solid fa-location-dot"></i></i> Change City
+            </div>
+
+            <div class="cityName">
+                Bangalore
+            </div>
+
+        </a>
+        <a href=""><i class="fa-solid fa-file-lines"></i>FAQs</a>
+        <a href=""><i class="fa-solid fa-file-lines"></i>Refer and Earn</a>
+        <a href=""><i class="fa-solid fa-file-lines"></i>Policies</a>
+        <a href=""><i class="fa-solid fa-phone"></i>Help & Support</a>
+
+    </div>
+
+    <div id="king">
+        <!-- Content -->
+        <div id="top1">
+            <img src="https://www.zoomcar.com/zap/subscribe/build/a2ff940380f1315a0c0aacefb766e858.jpg">
+            <div>
+                <b>Share Your Car and Earn<br>up to 50k per month</b>
+                <p>Get upto Rs 10,000/- on sign-up</p>
+                <a><button>Start Earning</button></a>
+            </div>
+        </div>
+
+        <!-- Video -->
+        <div id="video">
+            <video poster="https://www.zoomcar.com/zap/subscribe/build/b5c19bd207922df056590ca18550c599.jpg"
+                autoplay="true" muted="true" loop="true" id="video_0">
+                <source src="https://www.zoomcar.com/zap/subscribe/build/64440836bb2a2ee19961407349dece57.mp4"
+                    type="video/mp4">
+            </video>
+            <input type="submit" id="button" value="volume_off" onclick="unmuteFn()">
+        </div>
+
+        <!-- Content -->
+        <div id="top2"><a>
+                <img src="https://www.zoomcar.com/zap/subscribe/build/2a59620f522135d45def6fbc74162966.webp">
+            </a></div>
+
+        <div id="top3">
+            <div><b>3 Simple Steps To Start Earning with your car in 24 hours</b></div>
+            <div id="bot">
+                <div class="box1">
+                    <h3>1. Sign up for Free!</h3>
+                    <p>Become part of the ZoomCar host program for absolute free by filling up a short <a>form</a> after
+                        signup.
+                        It takes less than 2 min to fill the form. No Hidden Charges.
+                    </p>
+                </div>
+                <div class="box2">
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/bb6776beb9b8bacdc711e5a43f401134.svg">
+                </div>
+            </div>
+            <div>
+                <div class="box2">
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/29d798d8bc5d57bf22445ed3cc67cff1.svg">
+                </div>
+                <div class="box1">
+                    <h3>2. Get the Car Health Checked!</h3>
+                    <p>Once we recieved your details, our expert visits your location to access your vehicle,
+                        and install safety devices in it to ensure complete safety of your car. It all happens in 24
+                        hours.
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="box1">
+                    <h3>3. Share and Earn</h3>
+                    <p>Share Your car through the Zoomcar Host app whenever you are not using it. Flexibity in shareing,
+                        share as much or as less you like.Your weekly earnings get credited directly to your bank
+                        account!
+                    </p>
+                </div>
+                <div class="box2">
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/fc0cb48e9b85b44423a6660ba79ad43e.svg">
+                </div>
+            </div>
+        </div>
+
+        <div id="top4">
+
+            <div>
+                <h3>How We Protect Your Car</h3>
+            </div><br><br>
+            <div id="child">
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/e2bfa54a9b46567921c3f14e1276c68e.svg">
+                    <b>We cover major damages & repair</b>
+                    <p>Zoomcar provides damage cover and repair handling in case of an unlikely incident of a major
+                        accident during the sharing period/ when your car is on a booking.</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/1f4b5b69d928bbf104735bdea4914f79.svg">
+                    <b>Your Car Stays in Safe Hands!</b>
+                    <p>All our renters are verified individuals with valid Driving license, and have excellent driving
+                        stats in the past on our platform. We have complete contact and address details of all our
+                        renters.</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/eb002ff59dd838a60fd664d21539d877.svg">
+                    <b>Contactless sharing</b>
+                    <p>Our Keyless technology enables contactless pick-up & drop of your car.</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/584189ee6116aeef9f0bfad788813be1.svg">
+                    <b>Flexibility in sharing</b>
+                    <p>Share your car whenever you want, as per your usage and convenience</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/a0073dafcc39c09bcf084add77f94472.svg">
+                    <b>24 x 7 customer support</b>
+                    <p>Call us, Chat with us, drop an Email to us, we've got your back round the clock!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="top5">
+            <h3>Growing Rapidly</h3>
+            <p>Join Host Program and be part of largest tech enabled car sharing marketplace.</p>
+            <div id="child2">
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/e3a6d127cac35a3a7a139256bb3761eb.png"><br>
+                    <b>15,000+</b>
+                    <p>Satisfied host</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/4a5f55fc81b9a6df6a460a025fdfa509.png"><br>
+                    <b>5lac+</b>
+                    <p>Booking Served</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/36da13bf403485c4efacd507efd93735.png"><br>
+                    <b>32Cr+</b>
+                    <p>KMs Run</p>
+                </div>
+                <div>
+                    <img src="https://www.zoomcar.com/zap/subscribe/build/c0db9479a08980b830b63433f60d336c.png"><br>
+                    <b>$120Mn+</b>
+                    <p>Earned by Hosts</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="top6">
+            <h3>Share Your <span>Baleno ^</span><br> and earn upto <span>$25,000</span> per month</h3>
+            <button>Calculate Earning</button><br>
+            <a>How do we estimate Earnings?</a>
+            <div id="child3">
+                <img src="https://www.zoomcar.com/zap/subscribe/build/b561826c55602da000820bda8422a23d.webp">
+                <h3>You Earn $7,500<br>Your Friend gets<br>$10,000</h3><br>
+                <p id="p">you Both win</p>
+                <button>Refer and Earn</button>
+                <p>This opportunity is for your friends in Bangalore, Pune, Delhi NCR, Mumbai, Chennai, Hyderabad,
+                    Chandigarh, Kolkata, Ahmedabad, Coimbatore, Indore, Jaipur, Mangalore, Mysore, Vizag, Goa, Nagpur,
+                    Kochi, Vijayawada, Siliguri, Bhopal, Lucknow, Guwahati, Bhubaneswar, Vadodara, Nashik, Trichy &
+                    Madurai only.</p>
+                <p>Refer Multiple friends to earn upto $1Mn.</p>
+            </div>
+        </div>
+
+        <div id="top7">
+            <h3>Users love Zoomcar Host program. Our app has 4.5+ rating on play store!</h3>
+            <video poster="https://www.zoomcar.com/zap/subscribe/build/aea91d732f319de2a0e5161e4fc311c7.jpg"
+                autoplay="true" loop="true">
+                <source type="video/mp4"
+                    src="https://www.zoomcar.com/zap/subscribe/build/c35001c9c8b0c1ccc0a97a7a810110aa.mp4">
+            </video>
+        </div>
+    </div>
+    <div id="feedback">
+        <div id="first-box">
+            <h3 class="amigo-home__heading--reviews">What are the host users saying?</h3>
+            <p class="amigo-home__text--review-summary">10,000+ hosts are earning average of ₹ 50,000 per month</p>
+            <h3>What are the host users saying?</h3>
+            <p>10,000+ hosts are earning average of ₹ 50,000 per month</p>
+        </div>
+        <div>
+            <img src="https://www.zoomcar.com/zap/subscribe/build/3f72230754b1fb30e311c9f78848ee62.png" alt="">
+            <blockquote class="amigo-home__text--review">I always dreamt of owning a car in which I can take my family
+                for a
+                drive, But, due to high EMIs, I couldn't afford a car. With host program, I reduced my EMI by sharing
+                the
+                car on weekdays and take my family out on weekends. I am happy that I could finally realise my dream,
+                thanks
+                to host.</blockquote>
+            <address class="amigo-home__text--reviewer-details">
+                Gajendra Tomar, Age 38
+                <br>
+                Govt School Teacher, Pune
+            </address>
+        </div>
+        <div>
+            <img src="https://www.zoomcar.com/zap/subscribe/build/bd8cb705e0b100c897e16bbfff2a275f.png" alt="">
+            <blockquote class="amigo-home__text--review">I am an environmentally conscious person. I saw a wonderful
+                opportunity to do something for congested roads and the environment with host program. Sharing my second
+                car
+                on host helps me to reduce traffic and reduce my carbon footprint. And yes, additional earning through
+                my
+                second car is cherry on the cake :)</blockquote>
+            <address class="amigo-home__text--reviewer-details">
+                Srikanth Venkatesh, Age 43
+                <br>
+                VP in an IT Company, Hyderabad
+            </address>
+
+        </div>
+        <div>
+            <img src="	https://www.zoomcar.com/zap/subscribe/build/5c4df7d7677b23ee3d6c5e32e964303e.png" alt="">
+            <blockquote class="amigo-home__text--review">I bought a car recently. But, ended up using it only once or
+                twice
+                a week for errands and grocery visits. I saw a great way to earn additional money through the host
+                program
+                while also having the car to myself on weekends for my grocery visits. It is a win-win situation for me.
+            </blockquote>
+            <address class="amigo-home__text--reviewer-details">
+                Archana Sundaram, Age 55
+                <br>
+                Housewife, Hyderabad
+            </address>
+
+
+        </div>
+        <div>
+            <img src="	https://www.zoomcar.com/zap/subscribe/build/9f1be46d5b847adf8089338ebb6d89d8.png" alt="">
+            <blockquote class="amigo-home__text--review">I am a travel enthusiast and use my car to explore new places.
+                I
+                prefer taking public transport to office, because of which my car stays idle during the weekdays. So, I
+                decided to share my car on host. Now, I earn extra bucks for my travel expenses :)</blockquote>
+            <address class="amigo-home__text--reviewer-details">
+                Shishir Gupta, Age 28
+                <br>
+                Young urban professional, Pune
+            </address>
+
+        </div>
+        <div>
+            <img src="https://www.zoomcar.com/zap/subscribe/build/66c77e4621ef9ac32bdd9b5441ba7e71.png" alt="">
+            <blockquote class="amigo-home__text--review">My parents gave me a car so that I can commute safely to
+                college.
+                Since I've been having online classes now, my car wasn't being used much. I shared my car on host so
+                that I
+                could earn some extra pocket money from it. It easy to share the car on host and earn pocket money.
+            </blockquote>
+            <address class="amigo-home__text--reviewer-details">
+                Prateek Singh, Age 22
+                <br>
+                College Student, Hyderabad
+            </address>
+        </div>
+    </div>
+
+
+    <div id="footer_1">
+        <img src="https://www.zoomcar.com/zap/subscribe/build/5335b9a2cd132fc5c25ea3fec1177b02.svg" alt="">
+
+    </div>
+    <div id="last">
+        <p>More About Zoomcar Host</p>
+    </div>
+</body>
+<script>
+
+    window.addEventListener("scroll", function () {
+      let navbar = document.querySelector("#navbar");
+      navbar.classList.toggle("sticky", window.scrollY);
+
+    });
+
+//mute button
+        function unmuteFn(){
+        document.getElementById("video_0").muted = false;
+        document.getElementById("button").value = "volume_on"
+
+        document.getElementById("button").addEventListener("click",() =>{
+            muteFn();
+        })
+}
+function muteFn(){
+    document.getElementById("video_0").muted = true;
+    document.getElementById("button").value = "volume_off"
+
+    document.getElementById("button").addEventListener("click",() =>{
+            unmuteFn();
+    })
+}
+
+
+// Side-Navbar
+function openNav() {
+
+    document.getElementById("side-navbar").style.width = "400px";
+  
+    document.getElementById("main").style.backgroundColor = "rgba(0,0,0,0.6)";
+    document.getElementById("main").style.width = "100vw";
+    document.getElementById("main").style.height = "100vh";
+    document.getElementById("main").style.position = "fixed";
+    document.getElementById("main").style.top = "0";
+    document.getElementById("main").style.left = "0";
+  
+    document.getElementById("main").addEventListener("click", () => {
+      closeNav();
+    });
+  }
+  
+  function closeNav() {
+    document.getElementById("side-navbar").style.width = "0";
+    document.getElementById("main").style.backgroundColor = "rgba(0,0,0,0)";
+    document.getElementById("main").style.width = "0";
+    document.getElementById("main").style.height = "0";
+    document.getElementById("main").style.position = "none";
+    document.getElementById("main").style.top = "0";
+    document.getElementById("main").style.left = "0";
+  }
+</script>
+
+</html>
