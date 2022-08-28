@@ -46,3 +46,14 @@ document.querySelector(".findcars").addEventListener("click", () => {
 });
 let address = localStorage.getItem("currentSearch");
 document.querySelector(".banner .container .address p").innerText = address;
+
+
+let userData=JSON.parse(localStorage.getItem("userName"))||[];
+console.log(userData.name)
+
+let login = document.querySelector(".login");
+
+userData.forEach(element => {
+    login.innerText = element.name;
+});
+
