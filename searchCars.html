@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sealect Car</title>
+    <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://kit.fontawesome.com/45e6a363b2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="cars.css" />
+  </head>
+
+  <body>
+    <nav></nav>
+    <div class="main-container">
+      <div class="sorting">
+        <div class="sort">
+          <select name="" id="byprice">
+            <option value="">Sort Cars by price</option>
+            <option value="descending">High to Low</option>
+            <option value="ascending">Low to High</option>
+          </select>
+          <select name="" id="byrating">
+            <option value="">Sort Cars by rating</option>
+            <option value="descending">High to Low</option>
+            <option value="ascending">Low to High</option>
+          </select>
+          <select name="" id="driven">
+            <option value="">Sort Cars by distance driven</option>
+            <option value="descending">High to Low</option>
+            <option value="ascending">Low to High</option>
+          </select>
+        </div>
+        <div class="filter">
+          <p class="filterdesc">Filter by Fuel</p>
+          <div class="byfuel">
+            <input type="radio" name="fuel" id="petrol" value="petrol" />
+            <label for="petrol" name="fueltype">petrol</label>
+            <!-- for attribute of label should have same value as that of ID of its respective radio button -->
+            <!-- By this when we click on lable radio button will be checked -->
+            <input type="radio" name="fuel" id="diesel" value="diesel" />
+            <label for="diesel" name="fueltype">diesel</label>
+          </div>
+          <p class="filterdesc">Filter by transmission</p>
+
+          <div class="transmission">
+            <input type="radio" name="transmission" id="auto" value="auto" />
+            <label for="auto" name="transmission">Automatic</label>
+
+            <input
+              type="radio"
+              name="transmission"
+              id="manual"
+              value="manual"
+            />
+            <label for="manual" name="transmission">manual</label>
+          </div>
+          <p class="filterdesc">Filter by Space</p>
+
+          <div class="space">
+            <input type="radio" name="space" id="5seater" value="5seater" />
+            <label for="5seater" name="seats">5 seats</label>
+
+            <input type="radio" name="space" id="7seater" value="7seater" />
+            <label for="7seater" name="seats">7 seats</label>
+          </div>
+        </div>
+        <div class="ads">
+          <div>
+            Enjoy free kilometers. If you leave the car with excess fuel
+            compared to booking start, value of that extra fuel will be refunded
+            to you
+          </div>
+        </div>
+      </div>
+
+      <div class="subcontainer">
+        <div class="container">
+          <div class="address">
+            <i class="fa-solid fa-circle-dot"></i>
+            <p>Search for address</p>
+          </div>
+          <div class="date">
+            <i class="fa-solid fa-calendar-days"></i>
+            <div class="journeyDate">Select Journey date</div>
+          </div>
+        </div>
+        <div class="car-container">
+          <!-- <div class="car">
+            <div>
+              <div class="carimage">
+                <img
+                  src="https://zoomcar-assets.zoomcar.com/photographs/original/02760dae1afa7a02535764d5d260705ceeb34033.JPG?1631965146"
+                  alt=""
+                />
+              </div>
+              <div>
+                <h3>Hyundai Xcent</h3>
+                <p class="type">
+                  <span>Manual</span><span>Petrol</span><span>5 Seats</span>
+                </p>
+                <p class="rating">
+                  <i class="fa-solid fa-star"></i><span>5.0 (16)</span
+                  ><span>36k kms driven</span>
+                </p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <p>0.1km Rasta Peth - Near E...</p>
+              </div>
+              <div>
+                <h2>
+                  <i class="fa-solid fa-indian-rupee-sign"></i
+                  ><span>4,289</span>
+                </h2>
+                <button id="book">Book Now</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="module" src="searchCars.js"></script>

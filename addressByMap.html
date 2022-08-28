@@ -1,0 +1,269 @@
+<html>
+  <head>
+    <title>Reverse Geocoding</title>
+    <script
+      src="https://kit.fontawesome.com/45e6a363b2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- jsFiddle will insert css and js -->
+  </head>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    #map {
+      height: 85%;
+      width: 99%;
+      margin: auto;
+      margin-top: 20px;
+    }
+    #continue {
+      position: absolute;
+      width: 30%;
+      bottom: 10px;
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 12px;
+      padding: 10px 60px;
+      color: white;
+      background-color: #0ba311;
+      border: none;
+      letter-spacing: 3px;
+      border-radius: 5px;
+      opacity: 0.9;
+      cursor: pointer;
+    }
+    #continue:hover {
+      opacity: 1;
+      font-size: 14px;
+    }
+    button {
+      background-color: #0ba311;
+      color: white;
+      border: none;
+      letter-spacing: 3px;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #location {
+      width: 95%;
+      margin: auto;
+      margin-top: 0px;
+      margin-left: 40px;
+      padding: 5px 10px;
+      font-size: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+    #result {
+      position: absolute;
+      z-index: 10;
+      width: 95%;
+      margin: auto;
+      margin-top: 5px;
+      margin-left: 40px;
+      /* border: 1px solid red; */
+      height: max-content;
+      border-radius: 5px;
+      background-color: white;
+      opacity: 0.9;
+      transition: all 0.5s ease-in;
+    }
+    #result p {
+      line-height: 2;
+      word-spacing: 2px;
+      border-radius: 5px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      font-size: 18px;
+      padding: 5px 10px;
+      background-color: white;
+      opacity: 0.9;
+      border: 2px solid transparent;
+      transition: all 0.5s ease-in;
+    }
+    #result p:hover {
+      cursor: pointer;
+      border: 2px solid lightgray;
+      background-color: white;
+      opacity: 1;
+    }
+    #latlng {
+      width: 225px;
+    }
+    .fa-left-long {
+      font-size: 36px;
+      margin-left: 5px;
+      color: black;
+    }
+  </style>
+  <body>
+    <div class="back">
+      <a href="location.html"><i class="fa-solid fa-left-long"></i></a>
+    </div>
+    <input
+      type="text"
+      name=""
+      id="location"
+      placeholder="Search for location"
+      oninput="debounce(getlocation,1000)"
+    />
+    <div id="result"></div>
+
+    <div id="map"></div>
+    <div id="continue">CONTINUE</div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFpPhmjckxKaFFk_GyC4xtgeWW7-axue4&callback=initMap&v=weekly&channel=2"
+      async
+    ></script>
+  </body>
+</html>
+
+<script>
+  let lattitude = JSON.parse(localStorage.getItem("currentLat")) || 28.6517178,
+    longitude = JSON.parse(localStorage.getItem("currentLng")) || 77.2219388;
+  let count = 0;
+  let id;
+  let searchedLocation =
+    JSON.parse(localStorage.getItem("searchedLocation")) || [];
+  document.getElementById("continue").style.display = "none";
+  function appendlocations(data) {
+    let result = document.getElementById("result");
+    document.getElementById("result").style.visibility = "visible";
+    document.getElementById("result").style.opacity = "1";
+    result.innerHTML = null;
+    count++;
+    data.features.forEach((element) => {
+      let address = document.createElement("p");
+      address.innerText = element.properties.formatted;
+      let str = `${element.properties.lat},${element.properties.lon} `;
+      address.setAttribute("name", str);
+      address.addEventListener("click", (event) => {
+        let coord = event.target.getAttribute("name");
+        let text = event.target.innerText;
+        console.log(text);
+        document.getElementById("location").value = text;
+        let x = coord.split(",", 2);
+        lattitude = Number(x[0]);
+        longitude = Number(x[1]);
+        document.getElementById("continue").style.display = "block";
+        initMap();
+      });
+      result.append(address);
+    });
+    console.log(count);
+  }
+
+  window.addEventListener("click", (event) => {
+    // console.log(event.target.parentNode);
+    let x = event.target.parentNode.getAttribute("id");
+    if (count > 0) {
+      // console.log(x);
+      document.getElementById("result").style.height = "0";
+      let p = document.querySelectorAll("p");
+      p.forEach((el) => {
+        el.style.visibility = "hidden";
+        el.style.opacity = "0";
+      });
+    }
+  });
+
+  async function getlocation() {
+    console.log();
+    let search = document.getElementById("location").value;
+    let res = await fetch(
+      `https://api.geoapify.com/v1/geocode/autocomplete?text=${search}&apiKey=6b157d83684c4e4db7d0295c01f1592a`
+    );
+    let data = await res.json();
+    lattitude = await data.features[0].properties.lat;
+    longitude = await data.features[0].properties.lon;
+    console.log(data);
+    console.log(lattitude, longitude);
+    initMap();
+    appendlocations(data);
+  }
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: { lat: lattitude, lng: longitude },
+    });
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(lattitude, longitude),
+      map: map,
+      draggable: true,
+      animation: google.maps.Animation.Drop,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 80,
+        strokeWeight: 2,
+        strokeColor: "#0ba311",
+        fillColor: "#0ba311",
+        fillOpacity: 0.2,
+      },
+    });
+    // marker.setMap(null);
+    marker.setMap(map);
+
+    var infowindow = new google.maps.InfoWindow({
+      content: `lon: ${longitude},
+      lat: ${lattitude}`,
+    });
+
+    google.maps.event.addListener(marker, "dragend", (evt) => {
+      lattitude = evt.latLng.lat();
+      longitude = evt.latLng.lng();
+    });
+    google.maps.event.addListener(marker, "click", function () {
+      map.setZoom(15);
+      infowindow.open(map, marker); //it will display info on marker
+      map.setCenter(marker.getPosition()); //set marker at center
+    });
+  }
+  let confirm = document.getElementById("continue");
+  confirm.addEventListener("click", () => {
+    let currentSearch = "";
+    currentSearch = document.getElementById("location").value;
+    localStorage.setItem("currentSearch", currentSearch);
+    let loc = document.getElementById("location").value;
+    let flag = 0;
+    if (searchedLocation.length > 0) {
+      for (i = 0; i < searchedLocation.length; i++) {
+        if (loc === searchedLocation[i]) {
+          flag++;
+        }
+      }
+    }
+    if (flag == 0) {
+      searchedLocation.push(document.getElementById("location").value);
+      localStorage.setItem(
+        "searchedLocation",
+        JSON.stringify(searchedLocation)
+      );
+    }
+    window.location.href = "index.html";
+  });
+  function debounce(fun, delay) {
+    if (id) {
+      clearTimeout(id);
+    }
+
+    id = setTimeout(() => {
+      fun();
+    }, delay);
+  }
+</script>

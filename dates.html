@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Journey Date</title>
+    <script
+      src="https://kit.fontawesome.com/45e6a363b2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="css/mobiscroll.javascript.min.css" rel="stylesheet" />
+    <script src="js/mobiscroll.javascript.min.js"></script>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    .back {
+      margin-left: 30px;
+      margin-top: 50px;
+      font-size: 24px;
+    }
+    .fa-left-long {
+      font-size: 28px;
+      margin-right: 10px;
+      color: black;
+    }
+    .journeyDate {
+      width: 30%;
+      margin-left: 15%;
+      margin-top: 2.5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 10px;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      font-weight: 200;
+      font-size: 14px;
+    }
+    .calender {
+      width: 100%;
+      /* border: 1px solid black; */
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 80px;
+    }
+    .prev,
+    .next {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .fa-angle-right {
+      margin: 20px 30px;
+    }
+    .fa-angle-left {
+      margin: 20px 30px;
+    }
+    .currentmonth,
+    .nextmonth {
+      /* border: 1px solid black; */
+      width: 100%;
+      margin-top: 20px;
+    }
+    .month {
+      margin-left: 15px;
+      font-weight: 600;
+      color: #1f1f1f;
+    }
+    .days {
+      margin-top: 30px;
+      width: 100%;
+      border-bottom: 1px solid lightgray;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .days div {
+      text-align: center;
+      padding-bottom: 5px;
+      color: gray;
+      font-weight: 300;
+    }
+    .dates {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .dates div {
+      text-align: center;
+      color: gray;
+      font-weight: 300;
+      padding: 10px 0;
+    }
+    .dates div {
+      cursor: pointer;
+    }
+    .prev .nottoday {
+      color: lightgray;
+      pointer-events: none;
+    }
+    .fa-solid {
+      cursor: pointer;
+    }
+    .dates .start,
+    .dates .end {
+      color: white;
+      background-color: #0ba311;
+      border-radius: 5px;
+    }
+    #timerange {
+      width: 60%;
+      margin: 20px auto;
+    }
+    .clear {
+      align-self: center;
+      margin-left: 75vw;
+      border: none;
+      font-size: 18px;
+      color: #0ba311;
+      background-color: transparent;
+      cursor: pointer;
+      font-weight: 600;
+
+      text-transform: uppercase;
+    }
+    .container {
+      width: 75vw;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #fbfbfb;
+      border-radius: 5px;
+      margin-top: 10px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+    .continue {
+      width: 30%;
+      margin: auto;
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      padding: 15px 60px;
+      color: white;
+      background-color: #0ba311;
+      border: none;
+      letter-spacing: 3px;
+      border-radius: 5px;
+
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="back">
+      <a href="index.html"><i class="fa-solid fa-left-long"></i></a>
+      <span>Choose Trip Dates</span>
+    </div>
+    <div class="journeyDate">
+      <div class="start">
+        <p class="date">
+          Tue, <span id="num"> 29</span> <span id="mon"> Aug</span>
+          <span> '22</span>
+        </p>
+        <p class="time">8:30AM</p>
+      </div>
+      <div class="to"><i class="fa-solid fa-arrow-right-long"></i></div>
+      <div class="end">
+        <p class="date">
+          Wed, <span id="num"> 30</span> <span id="mon"> Aug</span>
+          <span> '22</span>
+        </p>
+        <p class="time">4:30PM</p>
+      </div>
+    </div>
+    <button class="clear">Clear</button>
+    <div class="container">
+      <div class="calender">
+        <div class="prev">
+          <i class="fa-solid fa-angle-left"></i>
+          <div class="currentmonth">
+            <div class="month"></div>
+            <div class="days">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+            <div class="dates"></div>
+          </div>
+        </div>
+        <div class="next">
+          <div class="nextmonth">
+            <div class="month"></div>
+            <div class="days">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+            <div class="dates"></div>
+          </div>
+          <i class="fa-solid fa-angle-right"></i>
+        </div>
+      </div>
+
+      <label id="timerange" oninput="gettime()">
+        Range
+        <input
+          id="demo-one-input"
+          mbsc-input
+          data-input-style="outline"
+          data-label-style="stacked"
+          placeholder="Please select journey time"
+        />
+      </label>
+    </div>
+    <div class="continue">CONTINUE</div>
+  </body>
+</html>
+<script src="dates.js"></script>

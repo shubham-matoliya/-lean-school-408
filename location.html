@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/45e6a363b2.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      .searchbox {
+        width: 65%;
+        margin: auto;
+        margin-top: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+      }
+      .searchbox > div {
+        /* border: 1px solid red; */
+        padding: 10px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 15px 10px;
+      }
+      .searchbox > div:nth-child(1) {
+        flex-grow: 1;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+      }
+      .searchbox span {
+        margin-left: 10px;
+        font-weight: 200;
+      }
+      .searchbox .fa-map,
+      .searchbox .fa-location-crosshairs {
+        font-size: 28px;
+      }
+
+      .fa-map,
+      .fa-circle-dot {
+        font-weight: 100;
+      }
+      .fa-circle-dot {
+        color: #0ba3108b;
+
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 8px #49ff18,
+          0 0 8px #49ff18, 0 0 8px #49ff18, 0 0 8px #49ff18, 0 0 8px #49ff18;
+      }
+      .searchbox input {
+        width: 100%;
+        font-size: 18px;
+        border: none;
+        margin-left: 10px;
+        outline: none;
+        font-weight: 200;
+      }
+      .searchbox a {
+        text-decoration: none;
+        color: black;
+      }
+      .recentSearch {
+        width: 65%;
+        margin: auto;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        height: 350px;
+        background-color: #fbfbfb;
+      }
+      .recentSearch > div {
+        width: 40%;
+        /* border: 1px solid red; */
+        height: 300px;
+        overflow: scroll;
+        scroll-behavior: smooth;
+      }
+      .recentSearch > div > .head {
+        padding: 10px;
+        background-color: #f5f5f5;
+      }
+      .recentSearch span {
+        width: 100%;
+        font-size: 14px;
+        font-weight: 200;
+        overflow: scroll;
+        cursor: pointer;
+      }
+      .recentcontent {
+        padding: 20px 0;
+        border-bottom: 1px solid lightgray;
+        display: flex;
+        align-items: center;
+        line-height: 1.5;
+      }
+      .recentcontent span {
+        margin-left: 10px;
+      }
+      .fa-location-dot {
+        font-size: 24px;
+      }
+      .suggested {
+        height: 300px;
+      }
+      #continue {
+        width: 30%;
+        margin: auto;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        padding: 15px 60px;
+        color: white;
+        background-color: #0ba311;
+        border: none;
+        letter-spacing: 2px;
+        border-radius: 5px;
+        opacity: 0.9;
+        cursor: pointer;
+      }
+      .fa-left-long {
+        font-size: 36px;
+        margin-top: 10px;
+        margin-left: 10px;
+        color: black;
+      }
+      #result {
+        position: absolute;
+        z-index: 10;
+        width: 65%;
+        top: 42%;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%);
+
+        margin-top: 5px;
+
+        /* border: 1px solid red; */
+        height: max-content;
+        border-radius: 5px;
+        background-color: white;
+        opacity: 0.9;
+        transition: all 0.5s ease-in;
+      }
+      #result p {
+        line-height: 2;
+        word-spacing: 2px;
+        border-radius: 5px;
+        font-weight: 200;
+        font-size: 18px;
+        padding: 5px 10px;
+        background-color: white;
+
+        border: 2px solid transparent;
+        transition: all 0.5s ease-in;
+      }
+      #result p:hover {
+        cursor: pointer;
+        border: 2px solid lightgray;
+        background-color: white;
+        opacity: 1;
+      }
+      .recently {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="back">
+      <a href="index.html"><i class="fa-solid fa-left-long"></i></a>
+    </div>
+    <div class="searchbox">
+      <div>
+        <i class="fa-solid fa-circle-dot"></i>
+        <input
+          type="text"
+          id="location"
+          placeholder="Select your starting point"
+          oninput="debounce(getlocation,1000)"
+        />
+      </div>
+      <div>
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <span class="currentposition"><a href="">Current Location</a></span>
+      </div>
+      <div>
+        <i class="fa-solid fa-map"></i>
+        <span><a href="addressByMap.html">Select Location on Map</a></span>
+      </div>
+    </div>
+    <div id="result"></div>
+    <div class="recentSearch">
+      <div class="recent">
+        <p class="head">RECENTLY SEARCHED LOCATIONS</p>
+        <div class="recently"></div>
+      </div>
+      <div class="suggested">
+        <p class="head">SUGGESTED PICK UP LOCATIONS</p>
+        <div class="recentcontent">
+          <i class="fa-solid fa-location-dot"></i>
+
+          <span>Jaipur Railway Station, Gopalbadi Road</span>
+        </div>
+        <div class="recentcontent">
+          <i class="fa-solid fa-location-dot"></i>
+
+          <span>
+            Gandhinagar railway station parking no.1, Gandhinagar railway
+            station road
+          </span>
+        </div>
+      </div>
+    </div>
+    <div id="continue">CONFIRM PICKUP LOCATION</div>
+  </body>
+</html>
+<script>
+  let id;
+  let count = 0;
+  document.getElementById("continue").style.display = "none";
+  let searchedLocation =
+    JSON.parse(localStorage.getItem("searchedLocation")) || [];
+  showrecentsearch(searchedLocation);
+  async function getlocation() {
+    let search = document.getElementById("location").value;
+    let res = await fetch(
+      `https://api.geoapify.com/v1/geocode/autocomplete?text=${search}&apiKey=6b157d83684c4e4db7d0295c01f1592a`
+    );
+    let data = await res.json();
+
+    console.log(data);
+
+    appendlocations(data);
+  }
+
+  function appendlocations(data) {
+    let result = document.getElementById("result");
+    document.getElementById("result").style.visibility = "visible";
+    document.getElementById("result").style.opacity = "1";
+    result.innerHTML = null;
+    count++;
+    data.features.forEach((element) => {
+      let address = document.createElement("p");
+      address.innerText = element.properties.formatted;
+      let str = `${element.properties.lat},${element.properties.lon} `;
+      address.setAttribute("name", str);
+      address.addEventListener("click", (event) => {
+        let coord = event.target.getAttribute("name");
+        let text = event.target.innerText;
+        console.log(text);
+        document.getElementById("location").value = text;
+        let x = coord.split(",", 2);
+        lattitude = Number(x[0]);
+        longitude = Number(x[1]);
+        document.getElementById("continue").style.display = "block";
+        initMap();
+      });
+      result.append(address);
+    });
+    console.log(count);
+  }
+
+  window.addEventListener("click", (event) => {
+    // console.log(event.target.parentNode);
+    let x = event.target.parentNode.getAttribute("id");
+    if (count > 0) {
+      // console.log(x);
+      document.getElementById("result").style.height = "0";
+      let p = document.querySelector("#result").querySelectorAll("p");
+      p.forEach((el) => {
+        el.style.visibility = "hidden";
+        el.style.opacity = "0";
+      });
+    }
+  });
+
+  function showrecentsearch(searchedLocation) {
+    let recent = document.querySelector(".recently");
+    recent.innerHTML = null;
+    searchedLocation.forEach((element) => {
+      let div = document.createElement("div");
+      div.setAttribute("class", "recentcontent");
+
+      let itag = document.createElement("i");
+      itag.setAttribute("class", "fa-solid fa-location-dot");
+      let span = document.createElement("span");
+      span.innerText = element;
+      span.addEventListener("click", (event) => {
+        document.getElementById("location").value = event.target.innerText;
+        document.getElementById("continue").style.display = "block";
+      });
+      div.append(itag, span);
+      recent.append(div);
+    });
+  }
+  let confirm = document.getElementById("continue");
+  confirm.addEventListener("click", () => {
+    let currentSearch = "";
+    currentSearch = document.getElementById("location").value;
+    localStorage.setItem("currentSearch", currentSearch);
+    let loc = document.getElementById("location").value;
+    let flag = 0;
+    if (searchedLocation.length > 0) {
+      for (i = 0; i < searchedLocation.length; i++) {
+        if (loc === searchedLocation[i]) {
+          flag++;
+        }
+      }
+    }
+    if (flag == 0) {
+      searchedLocation.push(document.getElementById("location").value);
+      localStorage.setItem(
+        "searchedLocation",
+        JSON.stringify(searchedLocation)
+      );
+    }
+    window.location.href = "index.html";
+  });
+  document
+    .querySelector(".currentposition")
+    .addEventListener("click", getCurrentPosition);
+  function getCurrentPosition(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(onSuccess);
+  }
+  function onSuccess(position) {
+    const { latitude, longitude } = position.coords;
+    console.log(latitude, longitude);
+    localStorage.setItem("currentLat", JSON.stringify(latitude));
+    localStorage.setItem("currentLng", JSON.stringify(longitude));
+    window.location.href = "addressByMap.html";
+  }
+  function debounce(fun, delay) {
+    if (id) {
+      clearTimeout(id);
+    }
+
+    id = setTimeout(() => {
+      fun();
+    }, delay);
+  }
+</script>
